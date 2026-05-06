@@ -1,42 +1,42 @@
 # Project 01: Baseline vs Minimal Harness
 
-比较弱 harness（仅靠 prompt）和显式 harness（规则文件 + 验证机制）对 AI 编码代理任务完成率的影响。
+Compare how a weak harness (prompt only) and an explicit harness (rule files plus verification mechanisms) affect the completion rate of AI coding-agent tasks.
 
-## 目录说明
+## Directory Guide
 
-| 目录 | 含义 |
+| Directory | Meaning |
 |------|------|
-| `starter/` | **起点**——只有一个模糊的 `task-prompt.md`，没有 AGENTS.md、没有 feature_list.json。这是你给代理的"弱 harness"版本。 |
-| `solution/` | **参考实现**——相同的应用代码，但配备了完整的 harness 文件（AGENTS.md、feature_list.json、init.sh、claude-progress.md）。这是"显式 harness"版本。 |
+| `starter/` | **Starting point**: only a vague `task-prompt.md`, with no AGENTS.md and no feature_list.json. This is the "weak harness" version you give to the agent. |
+| `solution/` | **Reference implementation**: the same application code, but with complete harness files (AGENTS.md, feature_list.json, init.sh, claude-progress.md). This is the "explicit harness" version. |
 
-## 使用方法
+## How to Use
 
 ```sh
-# 1. 用 starter（弱 harness）跑一次代理任务
+# 1. Run the agent task once with starter (weak harness)
 cd starter
 npm install
-# 把 task-prompt.md 的内容作为 prompt 给 Claude Code / Codex
-# 让代理尝试完成：窗口启动、文档列表、问答面板、数据目录
+# Give the contents of task-prompt.md as the prompt to Claude Code / Codex
+# Ask the agent to complete: window startup, document list, QA panel, data directory
 
-# 2. 用 solution（显式 harness）跑一次
+# 2. Run the same task with solution (explicit harness)
 cd ../solution
 npm install
-# 让代理读取 AGENTS.md，按规则执行同样的任务
+# Ask the agent to read AGENTS.md and follow the rules for the same task
 
-# 3. 对比两次结果
-# - 任务是否完成？
-# - 需要重试几次？
-# - 代理是否提前声称"完成"？
+# 3. Compare the two results
+# - Was the task completed?
+# - How many retries were needed?
+# - Did the agent claim "done" too early?
 ```
 
-## 本项目涉及的功能
+## Features Covered
 
-- Electron 窗口成功启动
-- UI 显示文档列表区域
-- UI 显示问答面板
-- 应用创建并使用本地数据目录
+- Electron window starts successfully
+- UI shows the document-list area
+- UI shows the QA panel
+- App creates and uses a local data directory
 
-## 对应课件
+## Related Lectures
 
-- [Lecture 01: 为什么强大的模型仍然会失败](../../docs/lectures/lecture-01-why-capable-agents-still-fail/index.md)
-- [Lecture 02: Harness 到底是什么](../../docs/lectures/lecture-02-what-a-harness-actually-is/index.md)
+- [Lecture 01: Why Capable Agents Still Fail](../../docs/en/lectures/lecture-01-why-capable-agents-still-fail/index.md)
+- [Lecture 02: What a Harness Actually Is](../../docs/en/lectures/lecture-02-what-a-harness-actually-is/index.md)

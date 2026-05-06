@@ -1,37 +1,37 @@
 # Project 05: Evaluator Loops and Three-Role Upgrades
 
-测量角色分离（单角色 / 生成+评估 / 计划+生成+评估）如何改变实现质量。
+Measure how role separation (single role, generator plus evaluator, planner plus generator plus evaluator) changes implementation quality.
 
-## 目录说明
+## Directory Guide
 
-| 目录 | 含义 |
+| Directory | Meaning |
 |------|------|
-| `starter/` | **起点**——基于 P4 solution，新增多轮问答历史功能待实现。 |
-| `solution/single-role/` | **变体 A**——一个代理完成所有工作（规划 + 实现 + 自我评审）。基础质量。 |
-| `solution/gen-eval/` | **变体 B**——生成器 + 评估器模式。较高质量，有修订证据。 |
-| `solution/plan-gen-eval/` | **变体 C**——计划器 + 生成器 + 评估器。最高质量，有冲刺合约和评分标准。 |
+| `starter/` | **Starting point**: based on the P4 solution, with multi-turn QA history still to implement. |
+| `solution/single-role/` | **Variant A**: one agent does all work (planning, implementation, and self-review). Baseline quality. |
+| `solution/gen-eval/` | **Variant B**: generator plus evaluator pattern. Higher quality, with revision evidence. |
+| `solution/plan-gen-eval/` | **Variant C**: planner plus generator plus evaluator. Highest quality, with a sprint contract and scoring criteria. |
 
-## 使用方法
+## How to Use
 
 ```sh
-# 三个变体各自独立运行
-cd solution/single-role && npm install  # 单角色模式
-cd solution/gen-eval && npm install     # 生成+评估模式
-cd solution/plan-gen-eval && npm install # 完整三角色模式
+# Run each of the three variants independently
+cd solution/single-role && npm install  # single-role mode
+cd solution/gen-eval && npm install     # generator plus evaluator mode
+cd solution/plan-gen-eval && npm install # full three-role mode
 
-# 对比三个变体的：
-# - 代码质量（evaluator-rubric.md 评分）
-# - 发现的缺陷数量
-# - 需要返工的程度
+# Compare the three variants:
+# - Code quality (evaluator-rubric.md score)
+# - Number of defects found
+# - Amount of rework required
 ```
 
-## 本项目涉及的功能
+## Features Covered
 
-- 多轮问答历史（对话式 UI）
-- 冲刺合约（sprint contract）
-- 评估器评分标准（evaluator rubric）调优
+- Multi-turn QA history (conversational UI)
+- Sprint contract
+- Evaluator rubric tuning
 
-## 对应课件
+## Related Lectures
 
-- [Lecture 09: 阻止代理过早宣布胜利](../../docs/lectures/lecture-09-why-agents-declare-victory-too-early/index.md)
-- [Lecture 10: 只有全流程运行才算真正的验证](../../docs/lectures/lecture-10-why-end-to-end-testing-changes-results/index.md)
+- [Lecture 09: Why Agents Declare Victory Too Early](../../docs/en/lectures/lecture-09-why-agents-declare-victory-too-early/index.md)
+- [Lecture 10: Why End-to-End Testing Changes Results](../../docs/en/lectures/lecture-10-why-end-to-end-testing-changes-results/index.md)

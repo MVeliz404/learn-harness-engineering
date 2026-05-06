@@ -1,43 +1,43 @@
 # Project 06: Runtime Observability and Debugging (Capstone)
 
-课程毕业项目：构建并基准测试完整的 harness，执行清理循环验证质量可维护性。
+Capstone project: build and benchmark a complete harness, then run cleanup loops to verify quality and maintainability.
 
-## 目录说明
+## Directory Guide
 
-| 目录 | 含义 |
+| Directory | Meaning |
 |------|------|
-| `starter/` | **起点**——完整的产品代码，但 harness 被刻意削弱（只有基础 AGENTS.md，没有 feature_list.json、session-handoff、clean-state-checklist）。 |
-| `solution/` | **参考实现**——最大 harness：所有产物文件齐全，质量文档评分高，包含基准测试脚本和清理扫描器。 |
+| `starter/` | **Starting point**: complete product code, but the harness is intentionally weakened (only basic AGENTS.md, with no feature_list.json, session handoff, or clean-state checklist). |
+| `solution/` | **Reference implementation**: maximum harness, with all artifact files present, high quality-document scores, benchmark scripts, and cleanup scanners. |
 
-## 使用方法
+## How to Use
 
 ```sh
 cd starter
 npm install
-# 用弱 harness 跑基准测试套件，记录结果
+# Run the benchmark suite with the weak harness and record the results
 
 cd ../solution
 npm install
-# 用完整 harness 跑同样的基准测试
-# 执行清理循环
-# 对比 quality-document.md 中的评分变化
+# Run the same benchmark with the complete harness
+# Execute cleanup loops
+# Compare score changes in quality-document.md
 
-# 运行基准测试
+# Run benchmark tests
 ./scripts/benchmark.sh
 
-# 运行清理扫描
+# Run cleanup scan
 ./scripts/cleanup-scanner.sh
 ```
 
-## 本项目涉及的功能
+## Features Covered
 
-- 导入文档
-- 构建或刷新索引
-- 带引用的问答
-- 运行时反馈
-- 可读的、可重启的仓库状态
+- Import documents
+- Build or refresh the index
+- Answer questions with citations
+- Runtime feedback
+- Readable, restartable repository state
 
-## 对应课件
+## Related Lectures
 
-- [Lecture 11: 让代理的运行时可观测](../../docs/lectures/lecture-11-why-observability-belongs-inside-the-harness/index.md)
-- [Lecture 12: 每次会话都要留下干净的状态](../../docs/lectures/lecture-12-why-every-session-must-leave-a-clean-state/index.md)
+- [Lecture 11: Why Observability Belongs Inside the Harness](../../docs/en/lectures/lecture-11-why-observability-belongs-inside-the-harness/index.md)
+- [Lecture 12: Why Every Session Must Leave a Clean State](../../docs/en/lectures/lecture-12-why-every-session-must-leave-a-clean-state/index.md)

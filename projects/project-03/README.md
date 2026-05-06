@@ -1,34 +1,34 @@
 # Project 03: Scope Control and Grounded Verification
 
-评估显式范围控制和验证门控是否能提高交付准确性。
+Evaluate whether explicit scope control and verification gates improve delivery accuracy.
 
-## 目录说明
+## Directory Guide
 
-| 目录 | 含义 |
+| Directory | Meaning |
 |------|------|
-| `starter/` | **起点**——基于 P2 solution，新增文档分块、元数据提取、索引状态、基础问答功能待实现。没有一次一个功能的策略约束。 |
-| `solution/` | **参考实现**——所有功能已实现，AGENTS.md 包含"一次一个功能"策略，feature_list.json 展示 fail→pass 的转换过程和验证证据。 |
+| `starter/` | **Starting point**: based on the P2 solution, with document chunking, metadata extraction, index status, and basic QA still to implement. There is no "one feature at a time" strategy constraint. |
+| `solution/` | **Reference implementation**: all features are implemented. AGENTS.md includes a "one feature at a time" strategy, and feature_list.json shows the fail-to-pass transition and verification evidence. |
 
-## 使用方法
+## How to Use
 
 ```sh
 cd starter
 npm install
-# 观察 agent 是否会同时实现多个功能（范围漂移）
+# Observe whether the agent implements multiple features at once (scope drift)
 
 cd ../solution
 npm install
-# 用 scope control 重跑，对比功能交付准确性
+# Rerun with scope control and compare feature delivery accuracy
 ```
 
-## 本项目涉及的功能
+## Features Covered
 
-- 文档分块（段落感知，~500 字符）
-- 元数据提取（词数、行数、段落数）
-- 索引状态在 UI 中显示
-- 基础问答流程，带来源引用
+- Document chunking (paragraph-aware, about 500 characters)
+- Metadata extraction (word count, line count, paragraph count)
+- Index status displayed in the UI
+- Basic QA flow with source citations
 
-## 对应课件
+## Related Lectures
 
-- [Lecture 05: 保持跨会话上下文](../../docs/lectures/lecture-05-why-long-running-tasks-lose-continuity/index.md)
-- [Lecture 06: 每次会话前先初始化](../../docs/lectures/lecture-06-why-initialization-needs-its-own-phase/index.md)
+- [Lecture 05: Why Long-Running Tasks Lose Continuity](../../docs/en/lectures/lecture-05-why-long-running-tasks-lose-continuity/index.md)
+- [Lecture 06: Why Initialization Needs Its Own Phase](../../docs/en/lectures/lecture-06-why-initialization-needs-its-own-phase/index.md)

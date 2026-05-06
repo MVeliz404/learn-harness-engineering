@@ -1,36 +1,36 @@
 # Project 04: Runtime Observability and Structural Control
 
-引入运行时可观测性和结构化边界检查，同时调试一个植入的运行时缺陷。
+Introduce runtime observability and structural boundary checks while debugging a seeded runtime defect.
 
-## 目录说明
+## Directory Guide
 
-| 目录 | 含义 |
+| Directory | Meaning |
 |------|------|
-| `starter/` | **起点**——基于 P3 solution，新增日志、结构化边界功能待实现。`IndexingService` 中植入了一个隐蔽 bug：超过 1000 字符的文件会产生空分块。没有架构检查脚本。 |
-| `solution/` | **参考实现**——结构化日志模块、架构边界检查脚本、植入 bug 已修复。 |
+| `starter/` | **Starting point**: based on the P3 solution, with logging and structural boundary features still to implement. `IndexingService` contains a hidden seeded bug: files longer than 1000 characters produce empty chunks. There is no architecture-check script. |
+| `solution/` | **Reference implementation**: structured logging module, architecture boundary-check script, and the seeded bug fixed. |
 
-## 使用方法
+## How to Use
 
 ```sh
 cd starter
 npm install
-# 1. 观察 agent 能否通过日志定位 bug
-# 2. 导入一个大文件，观察分块结果是否异常
+# 1. Observe whether the agent can locate the bug through logs
+# 2. Import a large file and check whether chunking behaves incorrectly
 
 cd ../solution
 npm install
-# 对比：结构化日志如何加速问题诊断
+# Compare how structured logs speed up diagnosis
 ```
 
-## 本项目涉及的功能
+## Features Covered
 
-- 启动日志
-- 导入和索引日志
-- 可见的问答失败路径
-- main / preload / renderer / services 层的显式边界
-- 调试一个植入的运行时缺陷
+- Startup logs
+- Import and indexing logs
+- Visible QA failure path
+- Explicit boundaries between main, preload, renderer, and services layers
+- Debugging a seeded runtime defect
 
-## 对应课件
+## Related Lectures
 
-- [Lecture 07: 给代理划定清晰的任务边界](../../docs/lectures/lecture-07-why-agents-overreach-and-under-finish/index.md)
-- [Lecture 08: 用功能列表约束代理行为](../../docs/lectures/lecture-08-why-feature-lists-are-harness-primitives/index.md)
+- [Lecture 07: Why Agents Overreach and Under-Finish](../../docs/en/lectures/lecture-07-why-agents-overreach-and-under-finish/index.md)
+- [Lecture 08: Why Feature Lists Are Harness Primitives](../../docs/en/lectures/lecture-08-why-feature-lists-are-harness-primitives/index.md)
