@@ -233,22 +233,22 @@ Grab the starter templates from the [Resource Library](https://walkinglabs.githu
 All six course projects revolve around the same product: **an Electron-based personal knowledge base desktop app**.
 
 ```text
-    ┌─────────────────────────────────────────────────────┐
-    │             Knowledge Base Desktop App              │
-    │                                                     │
-    │  ┌──────────────┐  ┌──────────────────────────────┐ │
-    │  │ Document List│  │       Q&A Panel              │ │
-    │  │              │  │                              │ │
-    │  │ doc-001.md   │  │  Q: What is harness eng?     │ │
-    │  │ doc-002.md   │  │  A: The environment built    │ │
-    │  │ doc-003.md   │  │     around an agent model... │ │
-    │  │ ...          │  │     [citation: doc-002.md]   │ │
-    │  └──────────────┘  └──────────────────────────────┘ │
-    │                                                     │
-    │  ┌─────────────────────────────────────────────────┐│
-    │  │ Status Bar: 42 docs | 38 indexed | last sync 3m ││
-    │  └─────────────────────────────────────────────────┘│
-    └─────────────────────────────────────────────────────┘
+    ┌──────────────────────────────────────────────────────┐
+    │             Knowledge Base Desktop App               │
+    │                                                      │
+    │  ┌──────────────┐  ┌──────────────────────────────┐  │
+    │  │ Document List│  │       Q&A Panel              │  │
+    │  │              │  │                              │  │
+    │  │ doc-001.md   │  │  Q: What is harness eng?     │  │
+    │  │ doc-002.md   │  │  A: The environment built    │  │
+    │  │ doc-003.md   │  │     around an agent model... │  │
+    │  │ ...          │  │     [citation: doc-002.md]   │  │
+    │  └──────────────┘  └──────────────────────────────┘  │
+    │                                                      │
+    │  ┌─────────────────────────────────────────────────┐ │
+    │  │ Status Bar: 42 docs | 38 indexed | last sync 3m │ │
+    │  └─────────────────────────────────────────────────┘ │
+    └──────────────────────────────────────────────────────┘
 
     Core features:
     ├── Import local documents
