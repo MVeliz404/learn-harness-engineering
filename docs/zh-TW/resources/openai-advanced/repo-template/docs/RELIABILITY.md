@@ -7,14 +7,14 @@
 - Bootstrap：`[command]`
 - Verification：`[command]`
 - 啟動應用或服務：`[command]`
-- 調試或查看運行態：`[command]`
+- 除錯或查看執行態：`[command]`
 
-## 必需運行信號
+## 必需執行信號
 
 - 啟動與關鍵流程的結構化日誌
 - 關鍵服務的 health check
-- 條件允許時為慢路徑提供 trace 或 timing 數據
-- 對可恢復失敗提供用戶可見的錯誤狀態
+- 條件允許時為慢路徑提供 trace 或 timing 資料
+- 對可恢復失敗提供使用者可見的錯誤狀態
 
 ## 黃金旅程
 
@@ -27,6 +27,6 @@
 ## 可靠性規則
 
 - 只要系統不能幹淨重啟，功能就不能算完成。
-- 運行失敗必須能從 repo-local 信號裡定位。
+- 執行失敗必須能從 repo-local 信號裡定位。
 - 某類失敗模式一旦反覆出現，就給它補 benchmark 或 guardrail。
 - cleanup 屬於可靠性的一部分，不是另外一件事。

@@ -1,13 +1,13 @@
-# Project 06. 搭建一套完整的 agent 工作環境
+# Project 06. 搭建完整的代理工作環境
 
-> 相關講義：[L11. 為什麼可觀測性屬於 harness](./../../lectures/lecture-11-why-observability-belongs-inside-the-harness/index.md) · [L12. 為什麼每次會話都要留乾淨狀態](./../../lectures/lecture-12-why-every-session-must-leave-a-clean-state/index.md)
+> 相關講義：[L11. 為什麼可觀測性屬於 harness](./../../lectures/lecture-11-why-observability-belongs-inside-the-harness/index.md) · [L12. 為什麼每次工作階段都要留乾淨狀態](./../../lectures/lecture-12-why-every-session-must-leave-a-clean-state/index.md)
 > 本篇範本檔案：[templates/](https://github.com/walkinglabs/learn-harness-engineering/blob/main/docs/zh-TW/resources/templates/)
 
 ## 你要做什麼
 
-這是結業項目。把前五個項目學到的所有東西組裝起來，跑一次完整的基準測試，然後做一輪清理，驗證質量是可以持續維護的。
+這是結業專案。把前五個專案學到的所有東西組裝起來，執行一次完整的基準測試，然後做一輪清理，驗證品質是可以持續維護的。
 
-你要用一套固定的多功能任務集，覆蓋知識庫應用的完整產品切片：導入文檔、構建索引、帶引用的問答、運行時可觀測性、可讀可重啟的倉庫狀態。先跑一次弱 harness 基線，再跑一次你組裝的最強 harness，然後做一輪清理和重跑。最後還要做一次 harness 精簡實驗——刪掉一個組件看看結果會不會變差，判斷哪些組件是真正有用的、哪些是多餘的開銷。
+你要用一套固定的多功能任務集，涵蓋知識庫應用的完整產品切片：匯入文件、建構索引、附引用的問答、執行時期可觀測性、可讀可重啟的儲存庫狀態。先執行一次弱 harness 基線，再執行一次你組裝的最強 harness，然後做一輪清理和重新執行。最後還要做一次 harness 精簡實驗——刪掉一個組件，觀察結果是否變差，判斷哪些組件是真正有用的、哪些是多餘的開銷。
 
 ## 使用倉庫內建專案
 
@@ -23,61 +23,60 @@
 - Claude Code 或 Codex
 - Git
 - Node.js + Electron
-- 質量文檔範本（`docs/zh-TW/resources/templates/quality-document.md`）
+- 品質文件範本（`docs/zh-TW/resources/templates/quality-document.md`）
 - 評估量表（`docs/zh-TW/resources/templates/evaluator-rubric.md`）
-- 前五個項目積累的所有 harness 組件
+- 前五個專案積累的所有 harness 組件
 
 ## 具體步驟
 
 ### 準備工作
 
-1. 基於 P05 完成後的代碼，從同一個 commit 出發。
-2. 創建兩個分支：`p06-baseline` 和 `p06-improved`。
-3. 用質量文檔範本給當前代碼打一次初始評分（每個產品領域和架構層的等級）。
-4. 定義一套固定的基準任務集和評分表——在跑任何 agent 之前就定好，跑的過程中不改。
+1. 以 P05 完成後的程式碼為基礎，從同一個 commit 出發。
+2. 建立兩個分支：`p06-baseline` 和 `p06-improved`。
+3. 以品質文件範本為目前程式碼進行初始評分（每個產品領域和架構層的等級）。
+4. 定義一套固定的基準任務集和評分表——在執行任何代理之前先定好，執行過程中不更改。
 
 基準任務集至少包括：
 
-- 導入一篇文檔
-- 構建或刷新索引
-- 回答一個帶引用的問題
-- 查看運行時日誌確認可觀測性
-- 關掉重開後狀態仍在
+- 匯入一篇文件
+- 建構或重新整理索引
+- 回答一個附引用的問題
+- 查看執行時期日誌確認可觀測性
+- 關閉再重新啟動後狀態仍保留
 
-### 第一次運行（弱 harness）
+### 第一次執行（弱 harness）
 
 切到 `p06-baseline` 分支。
 
 1. 用課程早期階段的弱 harness（沒有完整交接檔案、沒有嚴格驗證、可觀測性不足）。
-2. 用 agent 跑完整個基準任務集。
+2. 以代理執行完整個基準任務集。
 3. 立刻評分。記錄每個任務的完成狀態、重試次數、缺陷數。
-4. 更新質量文檔，記錄每個領域和層的等級變化。
+4. 更新品質文件，記錄每個領域和層的等級變化。
 
-### 第二次運行（強 harness）
+### 第二次執行（強 harness）
 
 切到 `p06-improved` 分支。
 
-1. 用你在這門課裡組裝的最強 harness：交接檔案和啟動腳本、明確的範圍和驗證關卡、運行時信號和架構約束、評估者或多角色審查、質量文檔追蹤。
+1. 用你在這門課裡組裝的最強 harness：交接檔案和啟動腳本、明確的範圍和驗證關卡、執行時期訊號和架構約束、評估者或多角色審查、品質文件追蹤。
 2. 同樣的基準任務集，同樣的模型和預算。
-3. 立刻評分。記錄結果。
-4. 更新質量文檔。
+3. 立刻評分，記錄結果，更新品質文件。
 
 ### 清理和重跑
 
 在 `p06-improved` 分支上：
 
-1. 做一輪清理：刪死代碼、修不清楚的文檔、理順不穩定的運行路徑。
-2. 清理後重跑同樣的基準任務集，重新評分。
-3. 更新質量文檔。
+1. 做一輪清理：刪除無用程式碼、修正不清楚的文件、理順不穩定的執行路徑。
+2. 清理後重新執行同樣的基準任務集，重新評分。
+3. 更新品質文件。
 
-對比三個快照的質量文檔：基線、強 harness、清理後。
+比對三個快照的品質文件：基線、強 harness、清理後。
 
 ### Harness 精簡實驗
 
 1. 從 `p06-improved` 分支中刪掉一個 harness 組件（比如刪掉 sprint contract，或者刪掉顯式範圍關卡）。
-2. 重跑基準任務集。
-3. 如果結果沒變差——說明這個組件是多餘的開銷，可以去掉。
-4. 如果結果變差了——說明這個組件是承重的，必須保留。
+2. 重新執行基準任務集。
+3. 如果結果沒變差，表示這個組件是多餘的開銷，可以去掉。
+4. 如果結果變差了，表示這個組件是承重的，必須保留。
 5. 記錄實驗結果。可以多試幾個組件。
 
 ## 怎麼衡量結果
@@ -88,16 +87,16 @@
 | 重試次數 | 每個任務需要重試幾次 |
 | 缺陷數 | 人工干預前發現的缺陷數量 |
 | 清理工作量 | 清理花了多長時間、改了多少檔案 |
-| 清理後可讀性和重啟成功率 | 清理後倉庫的可維護程度 |
+| 清理後可讀性和重啟成功率 | 清理後儲存庫的可維護程度 |
 | 質量文檔等級變化 | 三個快照的等級對比 |
 | Harness 精簡結果 | 哪些組件可以刪、哪些是承重的 |
 
 ## 要交什麼
 
-- 質量文檔的三個快照（基線、強 harness、清理後）
+- 品質文件的三個快照（基線、強 harness、清理後）
 - 基線基準測試記錄：評分和證據
 - 強 harness 基準測試記錄：評分和證據
-- 清理運行記錄：清理前後評分變化
+- 清理執行記錄：清理前後評分變化
 - Harness 精簡日誌：刪了什麼組件、基準結果、決定保留還是刪
 - 最終結業總結：關鍵經驗教訓
 
@@ -107,4 +106,4 @@
 - [Lecture 03 — 為什麼倉庫必須成為唯一事實來源](../../lectures/lecture-03-why-the-repository-must-become-the-system-of-record/index.md)
 - [Lecture 08 — 為什麼 feature list 是 harness 的基礎原語](../../lectures/lecture-08-why-feature-lists-are-harness-primitives/index.md)
 - [Lecture 11 — 為什麼可觀測性屬於 harness 的一部分](../../lectures/lecture-11-why-observability-belongs-inside-the-harness/index.md)
-- [Lecture 12 — 為什麼每個會話都必須留下乾淨狀態](../../lectures/lecture-12-why-every-session-must-leave-a-clean-state/index.md)
+- [Lecture 12 — 為什麼每個工作階段都必須留下乾淨狀態](../../lectures/lecture-12-why-every-session-must-leave-a-clean-state/index.md)

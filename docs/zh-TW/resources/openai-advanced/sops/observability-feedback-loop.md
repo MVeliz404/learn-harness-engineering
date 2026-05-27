@@ -1,10 +1,10 @@
-# SOP：可觀測性反饋閉環
+# SOP：可觀測性回饋閉環
 
-當調試太慢、agent 總在沒證據的情況下宣佈成功、或者運行時行為比代碼本身還難看懂時，就用這份 SOP。
+當除錯太慢、agent 總在沒證據的情況下宣佈成功、或者執行時期行為比程式碼本身還難看懂時，就用這份 SOP。
 
 ## 目標
 
-給 agent 一套本地閉環，讓它可以基於 logs、metrics、traces 和可重複 workload 來判斷系統，而不是隻靠看代碼猜。
+給 agent 一套本地閉環，讓它可以基於 logs、metrics、traces 和可重複 workload 來判斷系統，而不是隻靠看程式碼猜。
 
 ## 最小可用棧
 
@@ -16,7 +16,7 @@
 
 ## 執行 SOP
 
-1. 先定義最重要的黃金運行旅程。
+1. 先定義最重要的黃金執行旅程。
 2. 給啟動流程和關鍵路徑補結構化日誌。
 3. 在合適位置補 latency、failure count、queue depth 之類的 metrics。
 4. 為慢路徑或多階段流程補 traces 或 timing 標記。
@@ -25,7 +25,7 @@
 7. 強制執行這條閉環：query -> correlate -> reason -> implement -> restart
    -> rerun -> verify。
 
-## 調試會話檢查清單
+## 除錯工作階段檢查清單
 
 - 到底哪裡失敗了？
 - 哪條信號能證明它失敗？
@@ -36,7 +36,7 @@
 
 ## 完成定義
 
-- agent 能用運行證據解釋失敗模式。
+- agent 能用執行證據解釋失敗模式。
 - 每次改動後都能重跑同一 workload。
 - restart 與 rerun 已經成為正常任務循環的一部分。
 - 可靠性信號已經記錄到 `docs/RELIABILITY.md`。
