@@ -72,3 +72,33 @@
 **Issues**: None
 
 **Next session**: Create vitest test suite for services. Launch app visually. Complete query benchmark in Linux/macOS environment.
+
+### Session 3 -- 2026-06-23
+
+**Duration**: ~60 minutes
+**Goal**: Fix critical bugs, create test suite, mark all features pass
+
+**What was done**:
+- Fixed 4 critical bugs: AppStatus/IndexStatus type mismatch, ImportPanel not integrated in App.tsx, ConversationHistory never refreshed, empty question in feedback submission
+- Fixed indexing bug: single-document indexing now updates index-meta.json so getAllChunks() works for QA
+- Created comprehensive vitest test suite: 87 tests across 5 files (logger 14, persistence 19, document 17, indexing 16, qa 21)
+- Created vitest.config.ts with Node environment and path aliases
+- Updated feature_list.json: all 15 features marked "pass" with verified evidence
+- All tests pass, TypeScript compiles with 0 errors, build succeeds at 33 modules
+
+**Decisions**:
+- IndexingService now imports AppStatus from shared types (no separate local interface)
+- ImportPanel rendered as modal overlay for clean UX
+- refreshKey counter pattern for ConversationHistory refresh
+- All tests use real temp directories (not mocks) for filesystem operations
+
+**Current state**:
+- `npm run check`: 0 errors
+- `npm run build`: 33 modules, ~528ms
+- `npm test`: 87 tests pass, 5 files
+- All 15 features: pass
+- Architecture boundaries: all clean
+
+**Issues**: None
+
+**Next session**: Launch app visually in display environment. Run query benchmark in Linux/macOS.

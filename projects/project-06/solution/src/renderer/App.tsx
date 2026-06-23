@@ -3,6 +3,7 @@ import { DocumentList } from './components/DocumentList';
 import { QuestionPanel } from './components/QuestionPanel';
 import { DocumentDetail } from './components/DocumentDetail';
 import { ConversationHistory } from './components/ConversationHistory';
+import { ImportPanel } from './components/ImportPanel';
 import { StatusBar } from './components/StatusBar';
 import { Document, AppStatus, QAResponse, Citation } from '../shared/types';
 
@@ -17,7 +18,9 @@ export function App() {
     lastActivity: '',
   });
   const [lastResponse, setLastResponse] = useState<QAResponse | null>(null);
+  const [lastQuestion, setLastQuestion] = useState<string>('');
   const [viewMode, setViewMode] = useState<ViewMode>('documents');
+  const [showImportPanel, setShowImportPanel] = useState(false);
 
   const refreshDocuments = useCallback(async () => {
     try {
@@ -34,9 +37,15 @@ export function App() {
     refreshDocuments();
   }, [refreshDocuments]);
 
-  const handleImport = useCallback(async () => {
-    console.log('Import triggered - use window.knowledgeBase.documents.import(filePath)');
-  }, []);
+  const handleImport = useCallback(async (filePath: string) => {
+    try {
+      await window.knowledgeBase.documents.import(filePath);
+      setShowImportPanel(false);
+      await refreshDocuments();
+    } catch (err) {
+      console.error('Import failed:', err);
+    }
+  }, [refreshDocuments]);
 
   const handleSelectDocument = useCallback((doc: Document) => {
     setSelectedDoc(doc);
@@ -47,6 +56,7 @@ export function App() {
     try {
       const response = await window.knowledgeBase.qa.ask(question);
       setLastResponse(response);
+      setLastQuestion(question);
       const status = await window.knowledgeBase.indexing.status();
       setAppStatus(status);
     } catch (err) {
@@ -141,7 +151,7 @@ export function App() {
               Documents ({documents.length})
             </span>
             <button
-              onClick={handleImport}
+              onClick={() => setShowImportPanel(true)}
               style={{
                 padding: '4px 10px',
                 background: '#533483',
@@ -202,7 +212,7 @@ export function App() {
                       <div style={{ display: 'flex', gap: '6px' }}>
                         <button
                           onClick={() => window.knowledgeBase.feedback.submit(
-                            lastResponse.timestamp, '', 'positive'
+                            lastResponse.timestamp, lastQuestion, 'positive'
                           )}
                           style={{
                             padding: '4px 8px',
@@ -218,7 +228,7 @@ export function App() {
                         </button>
                         <button
                           onClick={() => window.knowledgeBase.feedback.submit(
-                            lastResponse.timestamp, '', 'negative'
+                            lastResponse.timestamp, lastQuestion, 'negative'
                           )}
                           style={{
                             padding: '4px 8px',
@@ -245,6 +255,53 @@ export function App() {
       </div>
 
       <StatusBar status={appStatus} />
+
+      {/* Import Panel Modal */}
+      {showImportPanel && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'rgba(0,0,0,0.6)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+        }}>
+          <div style={{
+            background: '#16213e',
+            borderRadius: '8px',
+            padding: '24px',
+            minWidth: '400px',
+            maxWidth: '500px',
+            border: '1px solid #0f3460',
+          }}>
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '16px',
+            }}>
+              <h2 style={{ fontSize: '16px', fontWeight: 600, margin: 0 }}>Import Document</h2>
+              <button
+                onClick={() => setShowImportPanel(false)}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: '#888',
+                  cursor: 'pointer',
+                  fontSize: '18px',
+                }}
+              >
+                ✕
+              </button>
+            </div>
+            <ImportPanel onImport={handleImport} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { QAHistory, Citation } from '../../shared/types';
 
 /**
@@ -15,10 +15,16 @@ import { QAHistory, Citation } from '../../shared/types';
 export function ConversationHistory() {
   const [history, setHistory] = useState<QAHistory[]>([]);
   const [expandedCitations, setExpandedCitations] = useState<Set<number>>(new Set());
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const loadHistory = useCallback(async () => {
+    const h = await window.knowledgeBase.qa.history();
+    setHistory(h);
+  }, []);
 
   useEffect(() => {
-    window.knowledgeBase.qa.history().then(setHistory);
-  }, []);
+    loadHistory();
+  }, [loadHistory, refreshKey]);
 
   const toggleCitation = (index: number) => {
     setExpandedCitations(prev => {
@@ -36,11 +42,13 @@ export function ConversationHistory() {
     if (window.confirm('Clear all conversation history? This cannot be undone.')) {
       await window.knowledgeBase.qa.clearHistory();
       setHistory([]);
+      setRefreshKey(k => k + 1);
     }
   };
 
   const handleFeedback = async (qaTimestamp: string, question: string, rating: 'positive' | 'negative') => {
     await window.knowledgeBase.feedback.submit(qaTimestamp, question, rating);
+    setRefreshKey(k => k + 1);
   };
 
   if (history.length === 0) {
