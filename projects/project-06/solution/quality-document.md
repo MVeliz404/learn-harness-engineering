@@ -15,7 +15,7 @@
 | Feedback Collection | A | Positive/negative ratings, persistent storage, per-response buttons |
 | Clean State Reset | A | Full data reset with confirmation, idempotent |
 | Test Coverage | B | Build-time checks pass, runtime verification via benchmark scripts |
-| Documentation | A | 3 docs files covering architecture, product, and reliability |
+| Documentation | A | 2 docs files covering architecture and product |
 | Benchmarking | A | Full task suite with timing for import, index, query |
 | Cleanup Scanner | A | Orphan detection and metadata consistency checks |
 | Harness Quality | A | 9 harness files, all complete and consistent |

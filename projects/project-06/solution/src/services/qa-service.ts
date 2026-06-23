@@ -56,32 +56,6 @@ const MOCK_PATTERNS: Array<{
   },
 ];
 
-/** Generate follow-up suggestions based on the answer context. */
-function generateFollowUps(question: string, citations: Citation[]): string[] {
-  const suggestions: string[] = [];
-
-  if (citations.length > 0) {
-    suggestions.push(`Tell me more about ${citations[0].documentTitle}`);
-  }
-
-  const questionLower = question.toLowerCase();
-  if (questionLower.includes('architecture') || questionLower.includes('design')) {
-    suggestions.push('How does the indexing pipeline work?');
-    suggestions.push('What logging is available?');
-  } else if (questionLower.includes('import') || questionLower.includes('document')) {
-    suggestions.push('How are documents indexed?');
-    suggestions.push('What file formats are supported?');
-  } else if (questionLower.includes('index') || questionLower.includes('chunk')) {
-    suggestions.push('How does keyword retrieval work?');
-    suggestions.push('What is the chunk size?');
-  } else {
-    suggestions.push('What is the system architecture?');
-    suggestions.push('How do I import documents?');
-  }
-
-  return suggestions.slice(0, 3);
-}
-
 export class QaService {
   private persistence: PersistenceService;
   private indexingService: IndexingService;

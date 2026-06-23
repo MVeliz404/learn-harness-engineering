@@ -58,6 +58,7 @@ export interface ConversationMessage {
 
 export interface AppStatus {
   documentsLoaded: number;
+  currentIndexed?: number;
   indexStatus: 'idle' | 'indexing' | 'ready' | 'error';
   lastActivity: string;
 }

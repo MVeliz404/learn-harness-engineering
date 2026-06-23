@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { QAHistory } from '../../../shared/types';
+import { useEffect, useState } from 'react';
+import { QAHistory, Citation } from '../../shared/types';
 
 /**
  * ConversationHistory -- solution version.
@@ -161,7 +161,7 @@ export function ConversationHistory() {
                   {/* Expanded citations */}
                   {isExpanded && item.response.citations.length > 0 && (
                     <div style={{ marginTop: '8px', paddingTop: '8px', borderTop: '1px solid #0f3460' }}>
-                      {item.response.citations.map((c, ci) => (
+                      {item.response.citations.map((c: Citation, ci: number) => (
                         <div key={ci} style={{
                           padding: '6px 8px',
                           marginBottom: '4px',

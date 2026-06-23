@@ -3,62 +3,53 @@
 ## Overall Assessment
 
 **Project**: Runtime Observability and Debugging (Capstone)
-**Evaluator**: Automated + Manual Review
-**Date**: 2026-03-30
+**Evaluator**: Automated
+**Date**: 2026-06-23
 
-### Scoring (1-5 scale)
+## Verifiable Checks
 
-| Criterion | Score | Notes |
-|-----------|-------|-------|
-| **Build & Compile** | 5 | Clean TypeScript compilation. No errors, no warnings. |
-| **Window Launch** | 5 | 1200x800 window with secure webPreferences. Preload bridge working. |
-| **Document Import** | 5 | File validation (size, existence). Metadata creation. Content storage. Logging. |
-| **Document Detail** | 5 | Full metadata display. Chunk viewer. Index button. Delete with confirmation. |
-| **Text Indexing** | 5 | Paragraph-aware chunking. Batch and single modes. Status tracking. Doc status updates. |
-| **Grounded Q&A** | 5 | Keyword retrieval. Citations with excerpts. Confidence scoring. 8 answer patterns. |
-| **Conversation History** | 5 | Chat bubbles. Expandable citations. Confidence colors. Timestamps. Clear history. |
-| **Feedback Collection** | 5 | Positive/negative ratings. Persistent storage. Per-response buttons. List API. |
-| **Structured Logging** | 5 | JSON format. Log levels. Service tags. Data payloads. All services covered. |
-| **Clean State Reset** | 5 | Full data reset. Confirmation dialog. React state cleared. Idempotent. |
-| **Persistence** | 5 | Documents, chunks, history, feedback all persist. Auto-load on mount. |
-| **Status Bar** | 5 | Status indicator. Document count. Indexed count. Timestamp. |
-| **Benchmark Scripts** | 5 | Import/index/query timing. Structured output. Full task suite. |
-| **Cleanup Scanner** | 5 | Orphan detection. Metadata consistency. Stale artifact reporting. |
-| **Harness Completeness** | 5 | All 9 harness files present. 3 docs. 3 sample data files. |
+Only checks with executable verification are scored. Features requiring manual UI interaction are tracked in `feature_list.json` and marked `NOT_STARTED` until unit tests exist.
 
-### Overall: 5.0 / 5
+### Automated Verification Results
+
+| Check | Script | Result | Evidence |
+|-------|--------|--------|----------|
+| **TypeScript compilation** | `npm run check` | PASS | 0 errors across both tsconfigs |
+| **Build output** | `npm run build` | PASS | 32 modules, main + preload + Vite renderer |
+| **Harness files present** | `bash init.sh` | PASS | All harness files + 3 sample docs verified |
+| **Architecture boundaries** | `bash scripts/check-architecture.sh` | PASS | 0 violations across all layers |
+| **Data integrity** | `bash scripts/cleanup-scanner.sh` | PASS | 0 stale artifacts (clean state) |
+| **Import benchmark** | `bash scripts/benchmark.sh` | PASS | 3 files in ~280ms |
+| **Index benchmark** | `bash scripts/benchmark.sh` | PASS | ~26 chunks in ~300ms |
+| **Query benchmark** | `bash scripts/benchmark.sh` | PENDING | Environment limitation (Git Bash grep) |
+| **Verify benchmark** | `bash scripts/benchmark.sh` | PASS | 0 size mismatches |
+
+### Feature Status
+
+All features in `feature_list.json` are marked `NOT_STARTED`. No unit tests exist to validate runtime behavior. See that file for per-feature evidence descriptions.
 
 ### Harness File Assessment
 
-| File | Present | Quality | Notes |
-|------|---------|---------|-------|
-| AGENTS.md | Yes | Complete | Full startup rules, conventions, definition of done |
-| CLAUDE.md | Yes | Complete | Quick reference with all 14 IPC channels |
-| feature_list.json | Yes | Complete | 15 features, all pass with evidence |
-| init.sh | Yes | Complete | 5-step verification including harness files |
-| claude-progress.md | Yes | Complete | Session log with benchmark results |
-| session-handoff.md | Yes | Complete | Full handoff with decisions and files modified |
-| clean-state-checklist.md | Yes | Complete | 30 check items across 7 categories |
-| evaluator-rubric.md | Yes | Complete | This file |
-| quality-document.md | Yes | Complete | High grades across all dimensions |
+| File | Present | Notes |
+|------|---------|-------|
+| AGENTS.md | Yes | Startup rules, architecture, conventions, verification commands, DoD |
+| feature_list.json | Yes | 15 features tracked, all NOT_STARTED pending tests |
+| init.sh | Yes | 5-step verification |
+| session-handoff.md | Yes | Updated with current session changes |
+| clean-state-checklist.md | Yes | 30 check items across 7 categories |
+| evaluator-rubric.md | Yes | This file |
+| quality-document.md | Yes | Quality dimensions assessment |
 
 ### Documentation Assessment
 
-| File | Present | Quality | Notes |
-|------|---------|---------|-------|
-| docs/ARCHITECTURE.md | Yes | Complete | Full layer diagram, data flows, storage layout |
-| docs/PRODUCT.md | Yes | Complete | All features described with UI layout |
-| docs/RELIABILITY.md | Yes | Complete | Logging, clean state, benchmarking strategy |
+| File | Present | Notes |
+|------|---------|-------|
+| docs/ARCHITECTURE.md | Yes | Full layer diagram, data flows, IPC channels, storage layout |
+| docs/PRODUCT.md | Yes | Feature requirements, UI layout, constraints |
 
-### IPC Channel Coverage
+## Summary
 
-14 channels registered, all with logging:
-
-- documents:list, documents:import, documents:get, documents:delete
-- indexing:start, indexing:status, indexing:chunks
-- qa:ask, qa:history, qa:clear-history
-- feedback:submit, feedback:list
-- app:reset
+This capstone project has a complete harness with automated verification scripts covering build, architecture, data integrity, and performance. All 15 features in `feature_list.json` are marked `NOT_STARTED` pending the creation of unit tests that can validate runtime behavior without a display environment.
 - app:status
 
 ### Summary

@@ -57,7 +57,7 @@ Run this checklist before committing and at the end of each session.
 - [ ] No unintended files in git status
 - [ ] No sensitive data (.env, credentials) staged
 - [ ] No files in `dist/` committed
-- [ ] `claude-progress.md` updated with current state
+- [ ] `PROGRESS.md` updated with current state
 - [ ] `feature_list.json` reflects actual feature status
 - [ ] `session-handoff.md` updated if session is ending
 

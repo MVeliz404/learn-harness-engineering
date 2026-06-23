@@ -65,30 +65,6 @@ A desktop application for managing a personal knowledge base. Users import text 
 - Indexed document count.
 - Last activity timestamp.
 
-## User Interface
-
-```
-+------------------+----------------------------------------+
-| Header           | History | Reset | Refresh              |
-+------------------+----------------------------------------+
-| Document List    | Document Detail / Conversation History |
-| (sidebar)        |   - Metadata display                   |
-|                  |   - Show Chunks toggle                 |
-| [+ Import]       |   - Index Document button              |
-|                  |   - Delete button                      |
-| doc1 (Indexed)   |                                        |
-|   3.2 KB         | Q&A Response:                          |
-| doc2 (Imported)  |   Answer text...                       |
-|   1.8 KB         |   Citations: [expandable]              |
-|                  |   Confidence: high                     |
-|                  |   [+1] [-1] feedback                   |
-+------------------+----------------------------------------+
-| Ask a question...                              [Ask]       |
-+-----------------------------------------------------------+
-| Status: Ready | Documents: 3 | Indexed: 3 | 12:34 PM     |
-+-----------------------------------------------------------+
-```
-
 ## Constraints
 
 - Maximum supported file size: 10 MB.

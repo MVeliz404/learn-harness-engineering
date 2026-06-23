@@ -23,7 +23,7 @@ TOTAL_TASKS=4
 # ---- Task 1: Import ----
 
 echo "[1/4] Import Benchmark"
-IMPORT_START=$(python3 -c "import time; print(time.time())" 2>/dev/null || date +%s)
+IMPORT_START=$(python3 -c "import time; print(int(time.time() * 1000))" 2>/dev/null || echo $(( $(date +%s) * 1000 )))
 
 import_count=0
 for file in "$SAMPLE_DIR"/*; do
@@ -37,8 +37,8 @@ for file in "$SAMPLE_DIR"/*; do
   fi
 done
 
-IMPORT_END=$(python3 -c "import time; print(time.time())" 2>/dev/null || date +%s)
-IMPORT_MS=$(( (IMPORT_END - IMPORT_START) * 1000 ))
+IMPORT_END=$(python3 -c "import time; print(int(time.time() * 1000))" 2>/dev/null || echo $(( $(date +%s) * 1000 )))
+IMPORT_MS=$((IMPORT_END - IMPORT_START))
 
 if [ "$import_count" -ge 3 ]; then
   echo "  PASS: $import_count files imported in ${IMPORT_MS}ms"
@@ -52,7 +52,7 @@ echo ""
 # ---- Task 2: Indexing ----
 
 echo "[2/4] Indexing Benchmark"
-INDEX_START=$(python3 -c "import time; print(time.time())" 2>/dev/null || date +%s)
+INDEX_START=$(python3 -c "import time; print(int(time.time() * 1000))" 2>/dev/null || echo $(( $(date +%s) * 1000 )))
 
 total_chunks=0
 for file in "$BENCH_DIR"/*; do
@@ -71,8 +71,8 @@ for file in "$BENCH_DIR"/*; do
   fi
 done
 
-INDEX_END=$(python3 -c "import time; print(time.time())" 2>/dev/null || date +%s)
-INDEX_MS=$(( (INDEX_END - INDEX_START) * 1000 ))
+INDEX_END=$(python3 -c "import time; print(int(time.time() * 1000))" 2>/dev/null || echo $(( $(date +%s) * 1000 )))
+INDEX_MS=$((INDEX_END - INDEX_START))
 
 if [ "$total_chunks" -ge 5 ]; then
   echo "  PASS: ~$total_chunks total chunks estimated in ${INDEX_MS}ms"
@@ -95,7 +95,7 @@ queries=(
   "How does logging work?"
 )
 
-QUERY_START=$(python3 -c "import time; print(time.time())" 2>/dev/null || date +%s)
+QUERY_START=$(python3 -c "import time; print(int(time.time() * 1000))" 2>/dev/null || echo $(( $(date +%s) * 1000 )))
 
 query_count=0
 for query in "${queries[@]}"; do
@@ -116,8 +116,8 @@ for query in "${queries[@]}"; do
   query_count=$((query_count + 1))
 done
 
-QUERY_END=$(python3 -c "import time; print(time.time())" 2>/dev/null || date +%s)
-QUERY_MS=$(( (QUERY_END - QUERY_START) * 1000 ))
+QUERY_END=$(python3 -c "import time; print(int(time.time() * 1000))" 2>/dev/null || echo $(( $(date +%s) * 1000 )))
+QUERY_MS=$((QUERY_END - QUERY_START))
 
 if [ "$query_count" -eq 5 ]; then
   avg_ms=$((QUERY_MS / query_count))

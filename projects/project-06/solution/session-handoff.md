@@ -1,81 +1,76 @@
 # Session Handoff -- Project 06 Capstone
 
-## Last Session: 2026-03-30
+## Last Session: 2026-06-23
 
 ### What Was Accomplished
 
-1. **Structured Logging** -- Implemented full JSON logging module:
-   - `logger.ts` with Logger, ServiceLogger, and LogLevel enum
-   - Singleton `logger` instance with `forService()` factory
-   - All 5 services emit structured JSON with timestamp, level, service, message, data
-   - IPC handlers log every channel invocation
+**TypeScript fixes (19 → 0 errors):**
+- Removed unnecessary `React` imports from 6 renderer files (`"jsx": "react-jsx"` already handles JSX transform)
+- Fixed broken relative import paths: components now use `../../shared/types`, App.tsx uses `../shared/types`
+- Added explicit `Citation` type annotations to `.map()` callbacks
+- Cast `File.path` for Electron compatibility: `(file as File & { path: string }).path`
+- Removed unused `generateFollowUps()` from `qa-service.ts`
+- Added `currentIndexed?: number` to `AppStatus` in `shared/types.ts`
 
-2. **Feedback Collection** -- Complete feedback pipeline:
-   - `FeedbackEntry` type in shared/types.ts
-   - `QaService.submitFeedback()` and `getFeedback()` methods
-   - `feedback:submit` and `feedback:list` IPC channels
-   - Preload bridge exposes `feedback.submit()` and `feedback.list()`
-   - ConversationHistory shows thumbs up/down buttons
-   - App.tsx shows feedback buttons on latest response
+**Script fixes:**
+- Fixed `scripts/benchmark.sh` float arithmetic: changed `time.time()` calls to output integer ms directly via `int(time.time() * 1000)`
 
-3. **Conversation History** -- Full chat-style component:
-   - Chat bubbles with distinct user/assistant styling
-   - Expandable citations with toggle button
-   - Confidence indicator with color coding
-   - Timestamps on each message
-   - Clear history with confirmation dialog
-   - Feedback buttons on each assistant response
+**Harness optimization:**
+- Removed all `CLAUDE.md` references (file deleted, 5 files updated: AGENTS.md, init.sh, feature_list.json, evaluator-rubric.md, PROGRESS.md)
+- Deleted `docs/RELIABILITY.md` — content redundant with AGENTS.md (verification commands) and ARCHITECTURE.md (logging)
+- Added high-level Architecture section to AGENTS.md (4-layer diagram, boundary rules, "where to find things" table)
+- Added Verification Commands section to AGENTS.md (all 6 verification scripts in one block)
+- Reset all features in `feature_list.json` to `NOT_STARTED` — no unit tests exist to validate runtime behavior
+- Rewrote `evaluator-rubric.md` to only report verifiable checks (removed 15 subjective 1-5 scores)
 
-4. **Clean State Reset** -- Complete data reset:
-   - `app:reset` IPC channel
-   - `PersistenceService.resetAll()` removes and recreates data directory
-   - App.tsx Reset button with confirmation dialog
-   - React state cleared after reset
+### Current State
 
-5. **Benchmark Scripts** -- Performance measurement:
-   - `scripts/benchmark.sh` with import, index, query, and verify tasks
-   - `scripts/cleanup-scanner.sh` for stale artifact detection
+| Check | Status |
+|-------|--------|
+| `npm run check` | ✅ 0 errors |
+| `npm run build` | ✅ 32 modules, ~530ms |
+| `bash init.sh` | ✅ 5/5 steps |
+| `bash scripts/check-architecture.sh` | ✅ 0 violations |
+| `bash scripts/cleanup-scanner.sh` | ✅ Clean (fresh install) |
+| `bash scripts/benchmark.sh` | ✅ Import 3 files/~280ms, Index 26 chunks/~300ms; Query task slow on Git Bash |
+| `npm test` | ❌ Exits 1 — no `*.test.*` or `*.spec.*` files exist |
 
-6. **Complete Harness** -- All files:
-   - AGENTS.md, CLAUDE.md, feature_list.json (15 features, all pass)
-   - init.sh, session-handoff.md, clean-state-checklist.md
-   - evaluator-rubric.md, quality-document.md
-   - docs/ARCHITECTURE.md, docs/PRODUCT.md, docs/RELIABILITY.md
+### Files Modified This Session
+
+- `src/renderer/App.tsx` — Removed React import, fixed types path, typed map callback, added Citation import
+- `src/renderer/components/ConversationHistory.tsx` — Removed React, fixed path, typed map, added Citation import
+- `src/renderer/components/DocumentDetail.tsx` — Removed React, fixed path
+- `src/renderer/components/DocumentList.tsx` — Removed React import entirely, fixed path
+- `src/renderer/components/ImportPanel.tsx` — Removed React, File.path cast for Electron
+- `src/renderer/components/StatusBar.tsx` — Removed React, fixed path
+- `src/services/qa-service.ts` — Removed unused generateFollowUps()
+- `src/shared/types.ts` — Added currentIndexed?: number to AppStatus
+- `scripts/benchmark.sh` — Fixed float arithmetic in timing calculations
+- `AGENTS.md` — Added Architecture + Verification Commands; removed CLAUDE.md + RELIABILITY.md refs
+- `init.sh` — Removed CLAUDE.md and RELIABILITY.md from harness verification
+- `evaluator-rubric.md` — Evidence-based only; removed subjective scores and CLAUDE.md
+- `feature_list.json` — All features NOT_STARTED; removed CLAUDE.md + RELIABILITY.md refs
+- `quality-document.md` — Updated docs count 3→2
+- `PROGRESS.md` — Removed CLAUDE.md + RELIABILITY.md refs; added Session 2
+- `session-handoff.md` — This file, rewritten for clean handoff
 
 ### What Remains
 
-No remaining features for Project 06. All 15 features in feature_list.json are at status "pass".
+- **Test suite**: `npm test` finds no test files. Vitest is configured but no `*.test.*` files exist. Services need unit tests (document, indexing, qa, persistence).
+- **App launch**: Not verified visually — requires display environment. Build compiles correctly.
+- **Query benchmark**: Git Bash `grep` is slow; the task works but takes too long in this environment.
 
 ### Decisions Made
 
-- Used singleton Logger with factory method for per-service loggers over per-instance loggers
-- Feedback stored in dedicated feedback.json for separation of concerns
-- Clean state uses destructive rmSync over selective file deletion for simplicity
-- Benchmark scripts written in bash for zero-dependency operation
-- ConversationHistory uses virtual scrolling approach (simple state-based) over complex library
-
-### Files Modified
-
-- `src/shared/types.ts` -- Added FeedbackEntry, RESET_DATA, SUBMIT_FEEDBACK, GET_FEEDBACK, CLEAR_HISTORY
-- `src/services/logger.ts` -- Full structured JSON logging with LogLevel enum
-- `src/services/persistence-service.ts` -- Added resetAll() with logging
-- `src/services/document-service.ts` -- Full logging, hasPersistedData(), size validation
-- `src/services/indexing-service.ts` -- Duration logging, throughput metrics, doc status updates
-- `src/services/qa-service.ts` -- Feedback methods, duration logging, expanded patterns
-- `src/main/main.ts` -- Enhanced logging, before-quit handler
-- `src/main/ipc-handlers.ts` -- All 14 channels with logging
-- `src/preload/preload.ts` -- Added feedback and app namespaces
-- `src/renderer/App.tsx` -- View mode switching, reset button, feedback on response
-- `src/renderer/components/ConversationHistory.tsx` -- Full chat-style with citations and feedback
-- `src/renderer/components/DocumentDetail.tsx` -- Delete, indexing state, refresh callback
-- `src/renderer/components/DocumentList.tsx` -- Chunk count display
-- `src/renderer/components/StatusBar.tsx` -- Indexed count
-- `src/renderer/types.d.ts` -- Added feedback and app types
-
-### Blockers
-
-None.
+- `File.path` cast uses `File & { path: string }` instead of `any` — respects project convention
+- `currentIndexed` is optional (`?:`) to avoid breaking existing AppStatus consumers
+- Benchmark timing uses Python `int(time.time() * 1000)` to keep bash arithmetic integer-only
+- RELIABILITY.md deleted per progressive disclosure principle: commands → AGENTS.md, logging → ARCHITECTURE.md
+- All features marked NOT_STARTED until verifiable by automated tests
 
 ### Next Steps
 
-Project 06 is complete. This is the final project in the Learn Harness Engineering course.
+1. Create vitest test suite under `src/__tests__/` or co-located `*.test.ts` files
+2. Launch app with `npm run dev` to verify window + UI visually
+3. Complete query benchmark in a Linux/macOS environment where `grep` performs well
+4. Consider adding `LOG_LEVEL` support to benchmark scripts for CI integration

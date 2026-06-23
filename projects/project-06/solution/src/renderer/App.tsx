@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { DocumentList } from './components/DocumentList';
 import { QuestionPanel } from './components/QuestionPanel';
 import { DocumentDetail } from './components/DocumentDetail';
 import { ConversationHistory } from './components/ConversationHistory';
 import { StatusBar } from './components/StatusBar';
-import { Document, AppStatus, QAResponse } from '../../shared/types';
+import { Document, AppStatus, QAResponse, Citation } from '../shared/types';
 
 type ViewMode = 'documents' | 'history';
 
@@ -188,7 +188,7 @@ export function App() {
                     {lastResponse.citations.length > 0 && (
                       <div style={{ marginTop: '10px', fontSize: '12px', color: '#8888bb' }}>
                         <strong>Citations:</strong>
-                        {lastResponse.citations.map((c, i) => (
+                        {lastResponse.citations.map((c: Citation, i: number) => (
                           <div key={i} style={{ marginTop: '4px', paddingLeft: '8px', borderLeft: '2px solid #533483' }}>
                             {c.documentTitle} (chunk {c.chunkIndex}): {c.excerpt.substring(0, 100)}...
                           </div>
