@@ -5,10 +5,11 @@
 Before writing any code, complete these steps in order:
 
 1. **Read this file completely.** It defines the boundaries, conventions, and architecture for this project.
-2. **Read `docs/ARCHITECTURE.md`** to understand the full Electron layer structure and data flow.
-3. **Read `docs/PRODUCT.md`** to understand the complete feature requirements.
-4. **Read `feature_list.json`** to see the current state of all features.
-5. **Run `bash init.sh`** to verify the project builds and initializes cleanly.
+2. **Read `session-handoff.md`** for context: what was last accomplished, what remains, what to do next.
+3. **Read `feature_list.json`** to see the current status of all features.
+4. **Read `docs/ARCHITECTURE.md`** to understand the full Electron layer structure and data flow.
+5. **Read `docs/PRODUCT.md`** to understand the complete feature requirements.
+6. **Run `bash init.sh`** to verify the project builds and initializes cleanly.
 
 ## Definition of Done
 
@@ -40,6 +41,9 @@ Services (src/services/)       Pure TS: DocumentService, IndexingService, QaServ
 
 | Need | Go to |
 |------|-------|
+| Session context (what was done, what remains) | `session-handoff.md` |
+| Full session history | `PROGRESS.md` |
+| Feature completion status | `feature_list.json` |
 | Types + IPC channel names | `src/shared/types.ts` |
 | Full data flows + storage + logging | `docs/ARCHITECTURE.md` |
 | Feature specs + UI layout | `docs/PRODUCT.md` |
@@ -66,7 +70,9 @@ Before each major testing cycle:
 
 ## Session Handoff
 
-When resuming work, read `session-handoff.md` for context from the previous session. When finishing a session, update it with:
+**Resuming work:** read `session-handoff.md` (last session summary + next steps) and `PROGRESS.md` (full history).
+
+**Finishing a session:** update `session-handoff.md` with:
 
 - What was accomplished
 - What remains
